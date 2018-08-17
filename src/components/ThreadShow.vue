@@ -49,7 +49,7 @@
       return {
         thread: sourceData.threads[this.id],
         posts: sourceData.posts,
-        users: sourceData
+        users: sourceData.users
       }
     }
   }
