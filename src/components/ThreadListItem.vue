@@ -9,7 +9,7 @@
         </router-link>
       </p>
       <p class="text-faded text-xsmall">
-        By <a href="#">Joseph Kerr</a>, {{thread.publishedAt}}.
+        By <a href="#">Joseph Kerr</a>, <AppDate :timestamp="thread.publishedAt"></AppDate>.
       </p>
     </div>
 
@@ -27,9 +27,9 @@
       </p>
       <p class="text-xsmall text-faded">2 hours ago</p>
       </div>
-      </div>
     </div>
   </div>
+
 </template>
 
 <script>

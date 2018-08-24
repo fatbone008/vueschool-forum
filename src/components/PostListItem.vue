@@ -19,9 +19,8 @@
       </div>
     </div>
 
-
-    <div class="post-date text-faded">
-      {{humanFriendlyDate}}
+    <div class="post-date text-faded" >
+      <AppDate :timestamp="post.publishedAt"></AppDate>
     </div>
 
   </div>
@@ -29,7 +28,6 @@
 
 <script>
   import sourceData from '@/data'
-  import moment from 'moment'
   export default {
     name: 'post-list-item',
     props: {
@@ -47,10 +45,6 @@
         // const postIdsArray = Object.keys(postIds)
         // return postIdsArray.length
         return Object.keys(this.user.posts).length
-      },
-      humanFriendlyDate () {
-        console.log('moment', this.post.publishedAt)
-        return moment.unix(this.post.publishedAt).format('MMMM Do YYYY, h:mm:ss a')
       }
     }
   }
