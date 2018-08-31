@@ -37,7 +37,8 @@
         // console.log(this.$store.state.posts, this.thread.posts)
         this.text = ''
 
-        this.$emit('save', {post})
+        // this.$emit('save', {post})
+        this.$store.dispatch('createPost', post)
       }
     }
   }
