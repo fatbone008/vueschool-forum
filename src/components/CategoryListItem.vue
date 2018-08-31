@@ -12,7 +12,6 @@
 
 <script>
   import ForumList from './ForumList'
-  import sourceData from '@/data'
 
   export default {
     name: 'CategoryListItem',
@@ -27,8 +26,8 @@
     },
     computed: {
       categoryForums () {
-        // console.log('sourceData.forums:', sourceData.forums)
-        return Object.values(sourceData.forums)
+        // console.log('this.$store.state.forums:', this.$store.state.forums)
+        return Object.values(this.$store.state.forums)
           .filter(forum => forum.categoryId === this.category['.key'])
       }
     }

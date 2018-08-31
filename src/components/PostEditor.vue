@@ -10,7 +10,7 @@
 </template>
 
 <script>
-  // import sourceData from '@/data'
+  //
   export default {
     name: 'post-editor',
 
@@ -34,7 +34,7 @@
           userId: '7uVPJS9GHoftN58Z2MXCYDqmNAh2',
           '.key': postId
         }
-        // console.log(sourceData.posts, this.thread.posts)
+        // console.log(this.$store.state.posts, this.thread.posts)
         this.text = ''
 
         this.$emit('save', {post})
