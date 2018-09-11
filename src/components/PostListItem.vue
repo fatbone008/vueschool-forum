@@ -27,6 +27,8 @@
 </template>
 
 <script>
+  import {countObjectProperties} from '../utils'
+
   export default {
     name: 'post-list-item',
     props: {
@@ -43,7 +45,8 @@
         // const postIds = this.user.postIds
         // const postIdsArray = Object.keys(postIds)
         // return postIdsArray.length
-        return Object.keys(this.user.posts).length
+        return countObjectProperties(this.user.posts)
+        // return Object.keys(this.user.posts).length
       }
     }
   }
