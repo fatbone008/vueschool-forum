@@ -35,10 +35,16 @@ export default new Router({
       props: true
     },
     {
-      path: '/me/',
+      path: '/me',
       name: 'Profile',
       component: Profile,
       props: true
+    },
+    {
+      path: '/me/edit',
+      name: 'ProfileEdit',
+      component: Profile,
+      props: {edit: true}
     },
     {
       path: '*',
