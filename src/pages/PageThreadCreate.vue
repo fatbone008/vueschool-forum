@@ -1,21 +1,21 @@
 <template>
   <div class="col-full push-top">
 
-    <h1>Create new thread in <i>Cooking</i></h1>
+    <h1>Create new thread in <i>{{forum.name}}</i></h1>
 
-    <form action="">
+    <form @submit.prevent="save">
       <div class="form-group">
         <label for="thread_title">Title:</label>
-        <input type="text" id="thread_title" class="form-input" name="title">
+        <input v-model="title" type="text" id="thread_title" class="form-input" name="title">
       </div>
 
       <div class="form-group">
         <label for="thread_content">Content:</label>
-        <textarea id="thread_content" class="form-input" name="content" rows="8" cols="140"></textarea>
+        <textarea v-model="text" id="thread_content" class="form-input" name="content" rows="8" cols="140"></textarea>
       </div>
 
       <div class="btn-group">
-        <button class="btn btn-ghost">Cancel</button>
+        <button @click.prevent="cancel" class="btn btn-ghost">Cancel</button>
         <button class="btn btn-blue" type="submit" name="Publish">Publish </button>
       </div>
     </form>
@@ -24,7 +24,30 @@
 
 <script>
     export default {
-        name: "page-thread-create"
+      props: {
+        forum: {
+          type: Object,
+          required: true
+        }
+      },
+      data () {
+        return {
+          title: '',
+          text: ''
+        }
+      },
+      methods: {
+        save () {
+          // dispatch
+          this.$store.dispatch('createThread', {forumId: this.forum['.key'], title: this.title, text: this.text})
+            .then(thread => {
+              this.$router.push({name: 'ThreadShow', params: {id: thread['.key']}})
+            })
+        },
+        cancel () {
+          this.$router.push({name: 'forum', params: {id: this.forum['.key']}})
+        }
+      }
     }
 </script>
 
