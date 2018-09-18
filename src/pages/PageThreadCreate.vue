@@ -3,57 +3,57 @@
 
     <h1>Create new thread in <i>{{forum.name}}</i></h1>
 
-    <form @submit.prevent="save">
-      <div class="form-group">
-        <label for="thread_title">Title:</label>
-        <input v-model="title" type="text" id="thread_title" class="form-input" name="title">
-      </div>
+    <ThreadEditor @save="save" @cancel="cancel"></ThreadEditor>
+    <!--<form @submit.prevent="save">-->
+    <!--<div class="form-group">-->
+    <!--<label for="thread_title">Title:</label>-->
+    <!--<input v-model="title" type="text" id="thread_title" class="form-input" name="title">-->
+    <!--</div>-->
 
-      <div class="form-group">
-        <label for="thread_content">Content:</label>
-        <textarea v-model="text" id="thread_content" class="form-input" name="content" rows="8" cols="140"></textarea>
-      </div>
+    <!--<div class="form-group">-->
+    <!--<label for="thread_content">Content:</label>-->
+    <!--<textarea v-model="text" id="thread_content" class="form-input" name="content" rows="8" cols="140"></textarea>-->
+    <!--</div>-->
 
-      <div class="btn-group">
-        <button @click.prevent="cancel" class="btn btn-ghost">Cancel</button>
-        <button class="btn btn-blue" type="submit" name="Publish">Publish </button>
-      </div>
-    </form>
+    <!--<div class="btn-group">-->
+    <!--<button @click.prevent="cancel" class="btn btn-ghost">Cancel</button>-->
+    <!--<button class="btn btn-blue" type="submit" name="Publish">Publish </button>-->
+    <!--</div>-->
+    <!--</form>-->
   </div>
 </template>
 
 <script>
-    export default {
-      props: {
-        forumId: {
-          type: String,
-          required: true
-        }
+  import ThreadEditor from '@/components/ThreadEditor'
+
+  export default {
+    components: {
+      ThreadEditor
+    },
+    props: {
+      forumId: {
+        type: String,
+        required: true
+      }
+    },
+    methods: {
+      save ({title, text}) {
+        // dispatch
+        this.$store.dispatch('createThread', {forumId: this.forum['.key'], title, text})
+          .then(thread => {
+            this.$router.push({name: 'ThreadShow', params: {id: thread['.key']}})
+          })
       },
-      data () {
-        return {
-          title: '',
-          text: ''
-        }
-      },
-      methods: {
-        save () {
-          // dispatch
-          this.$store.dispatch('createThread', {forumId: this.forum['.key'], title: this.title, text: this.text})
-            .then(thread => {
-              this.$router.push({name: 'ThreadShow', params: {id: thread['.key']}})
-            })
-        },
-        cancel () {
-          this.$router.push({name: 'forum', params: {id: this.forum['.key']}})
-        }
-      },
-      computed: {
-        forum () {
-          return this.$store.state.forums[this.forumId]
-        }
+      cancel () {
+        this.$router.push({name: 'forum', params: {id: this.forum['.key']}})
+      }
+    },
+    computed: {
+      forum () {
+        return this.$store.state.forums[this.forumId]
       }
     }
+  }
 </script>
 
 <style scoped>
