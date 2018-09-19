@@ -14,8 +14,11 @@
     </div>
 
     <div class="post-content">
-      <div>
+      <div v-if="!editing">
         {{post.text}}
+      </div>
+      <div v-else>
+        <PostEditor :post="post"></PostEditor>
       </div>
     </div>
 
@@ -28,9 +31,18 @@
 
 <script>
   import {countObjectProperties} from '../utils'
+  import PostEditor from '@/components/PostEditor'
 
   export default {
     name: 'post-list-item',
+    components: {
+      PostEditor
+    },
+    data () {
+      return {
+        editing: true
+      }
+    },
     props: {
       post: {
         required: true,

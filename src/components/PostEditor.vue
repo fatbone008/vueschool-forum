@@ -16,12 +16,16 @@
 
     data () {
       return {
-        text: ''
+        text: this.post ? this.post.text : ''
       }
     },
     props: {
       threadId: {
-        required: true
+        required: false
+      },
+
+      post: {
+        type: Object
       }
     },
     methods: {
